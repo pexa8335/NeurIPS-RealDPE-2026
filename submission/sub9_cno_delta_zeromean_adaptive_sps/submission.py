@@ -208,10 +208,11 @@ def predict(input_array, metadata=None):
     hw_raw = base_hw + scale * std_uv * h_factors  # (N, 20, 32, 64, 2)
     hw_uv = torch.clamp(hw_raw, min=base_hw, max=max_hw)
 
-    # Combined: delta-feature point predictor + u-channel multiplier c_u = 0.80
+    # Candidate A1: scale u-channel half-width by 0.80, v-channel unchanged
+    hw_uv[..., 0] = hw_uv[..., 0] * 0.80
+
     hw_t = torch.zeros((N, 20, 32, 64, 3), dtype=torch.float32, device=device)
-    hw_t[..., 0] = 0.80 * hw_uv[..., 0]
-    hw_t[..., 1] = hw_uv[..., 1]
+    hw_t[..., :2] = hw_uv
 
     lower_t = prediction_t - hw_t
     upper_t = prediction_t + hw_t

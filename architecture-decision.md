@@ -1341,3 +1341,147 @@ do not architecture-fish further in the temporal branch. If new work is
 authorized, preregister the separate learned spatial fluctuation-energy
 allocation hypothesis. Full protocol, gates, artifacts and operational
 amendments are in `research/fast_slow_architecture_12_9/report.md`.
+
+## SPS additional-feature probe — exploratory FAIL (2026-09-12)
+
+Implemented the requested fixed-point A/B/C falsification probe in
+`research/sps_feature_probe_12_9/`. A uses exact saved sub8 adaptive widths;
+B is a shallow log-error tree on horizon/channel/history-std/current-width;
+C uses the same learner and sampled rows plus history-delta RMS, forecast
+fluctuation, spatial gradient and CNO correction magnitude. Two outer folds
+hold out measured Re; inner three-fold trajectory CV selects width multipliers
+or fallback A. All feature/learner choices and gates were locked before running.
+
+All four inner selections fell back to A. Selected outer policies A/B/C therefore
+all score **47.741400 offline SPS**, C-A=C-B=0; the symmetric fixed-center
+target-informed oracle scores **63.292821**. Best learned inner widths were
+inferior to A in both folds. **Stop this feature/learner family; no retuning or
+neural uncertainty head is justified by this result.** This is not evidence
+that residual-error information is absent for all models/features. Oracle
+headroom does not establish attainable gain.
+
+The 58 validation windows did not train point-head weights but selected its
+checkpoint and have been repeatedly inspected. The new probe is exploratory,
+not independent confirmation; CNO training provenance remains incomplete.
+No 80-window holdout, package or leaderboard submission was used. Synthetic
+official-scorer parity, target-mutation isolation, nested group separation and
+per-window aggregate reconstruction all passed independent verification.
+
+**Sub8 remains hidden-leaderboard verified**, reconfirmed by the user:
+RelL2 94.582535, TKE 75.183675, MVPE 93.487926, time 87.219300,
+SPS 37.747438, final **79.246324**. Those hidden scores are distinct from the
+new probe's offline scores and retain their existing evidence status.
+
+See `research/sps_feature_probe_12_9/report.md`, `protocol.md`,
+`decision.json`, `inner_selection.json`, and `independent_verification.json`.
+
+## Mean constraint falsification — partial mechanism support, candidate FAIL (2026-09-12)
+
+User authorized the mean diagnostic and subsequent assumption-isolating
+experiments. Protocol and code/input hashes were locked in
+`research/mean_constraint_12_9/` before measurement.
+
+On the 58 selection-exposed validation windows, exact sub8 temporal-mean error
+accounts for **32.2248% of field SSE**. An unimplementable target-informed
+mean-only correction reduces RelL2 error **19.1299%**; TKE changes by at most
+2.22e-16. Mean SSE is almost entirely in the active region. This establishes
+headroom, not learnability, and passed the preregistered stage-1 gate.
+
+Stage 2 retrained 12 heads: ZeroMean/Ordinary x seeds 42/43 x 3 outer Re folds,
+using only the existing 339 training windows. Whole Re and trajectory groups
+were excluded; every normalization statistic was fit inside each training
+fold. Both arms used identical initial raw weights, 55,528 parameters, batch
+orders, AdamW, field+.30 TKE loss and 12 fixed epochs with no evaluation-based
+checkpoint selection. Historical data reuse and incomplete frozen-CNO training
+provenance remain limitations; this is not a pristine whole-pipeline test.
+
+| OOF ensemble metric | ZeroMean | Ordinary | Relative change |
+|---|---:|---:|---:|
+| RelL2 error | 0.08557767 | 0.08508748 | -0.5728% |
+| MVPE error | 0.08014643 | 0.07857941 | -1.9552% |
+| TKE error | 0.58846867 | 0.59453837 | +1.0314% |
+| Mean SSE | 3.78632011 | 3.72934488 | -1.5048% |
+
+Both seeds improve RelL2/MVPE. Ensemble mean SSE improves in all three folds
+and 10/13 Re groups; paired trajectory bootstrap CI for mean-SSE difference
+is [-0.100315,-0.017789]. **Only the TKE gate fails**: +1.0314% exceeds the
+locked +0.5% limit. Candidate status is FAIL, but this is positive evidence
+that some mean correction is learnable in this setup. Do not summarize it as
+"mean CNO must be frozen" or "all mean adaptation failed".
+
+Descriptively removing Ordinary's mean correction restores MVPE to ZeroMean,
+raises RelL2 error to 0.08568112 (erasing the benefit), and leaves Ordinary TKE
+unchanged. A temporal-constant correction cannot itself change TKE; removing
+the constraint also changes the jointly learned fluctuations. Isolating mean
+adaptation from fluctuation learning is a separate test, not a proven solution.
+
+Official metric calculations, SSE decomposition, source hashes, fold-local
+normalization, initialization/parameter parity, batch membership and fixed
+epoch counts passed verification. Detailed artifacts: `report.md`,
+`decision.json`, `verification.json`, `groups.csv`, `horizon.csv`, and the
+per-seed checkpoints under `research/mean_constraint_12_9/`.
+No 80-window holdout or leaderboard submission was used. Sub8 remains the
+hidden-verified incumbent at final 79.246324.
+
+## Fixed OOF mean transplant — post-hoc support (2026-09-12)
+
+User requested implementation and authorized using the last leaderboard slot
+if a useful concrete assumption test warrants it. Implemented
+`research/mean_constraint_12_9/hybrid.py`: ZeroMean prediction plus the temporal
+mean of Ordinary minus the temporal mean of ZeroMean. Coefficient is exactly
+one; no target, fitted calibration, or coefficient search enters prediction.
+This is explicitly post-hoc and does not relabel the previous Ordinary FAIL.
+
+| OOF metric | ZeroMean | Hybrid | Relative change |
+|---|---:|---:|---:|
+| RelL2 error | 0.08557767 | 0.08497871 | -0.6999% |
+| MVPE error | 0.08014643 | 0.07857941 | -1.9552% |
+| TKE error | 0.58846867 | 0.58846867 | unchanged |
+| Mean SSE | 3.78632011 | 3.72934488 | -1.5048% |
+
+The fixed transplant meets the previous numerical effect/robustness criteria,
+but these are descriptive checks on a post-hoc candidate, not preregistered
+independent confirmation. Both seeds improve RelL2/MVPE; ensemble mean SSE
+improves on all folds and 10/13 Re groups. Seed 42 mean SSE alone regresses
+0.0821%, so do not claim every seed improves every mean metric. Paired
+trajectory bootstrap intervals for differences are RelL2
+[-0.00086323,-0.00037220], MVPE [-0.00216736,-0.00094018].
+
+Verified source hashes/sample identities, TKE invariance (maximum change
+2.22e-16 in float64 diagnostic), equality of hybrid fluctuation SSE to
+ZeroMean and mean SSE/MVPE to Ordinary, and shared zero-mask preservation.
+The float64 diagnostic does not certify float32 deployed-package parity.
+It supports separating mean adaptation from fluctuation prediction in this
+setup, not a physical Sim2Real mechanism or a guaranteed hidden-score gain.
+
+No leaderboard attempt was spent: these are fold-specific OOF heads, not a
+full-data mean adapter integrated and verified against exact deployed sub8.
+Submission authorization is acknowledged; package readiness is not established.
+See `hybrid_report.md`, `hybrid_decision.json`, `hybrid_windows.csv` and
+`hybrid_groups.csv` under `research/mean_constraint_12_9/`.
+
+## Exact-sub8 mean-adapter bridge — validation FAIL (2026-09-12)
+
+Implemented the authorized full-training bridge in `research/sub8_mean_adapter/`.
+Two Ordinary heads were trained on 339 training windows, seeds 42/43, fixed 12
+epochs and the previous matched loss/optimizer. Only their temporal mean output
+is added to fresh exact-sub8 predictions, using train-only normalizers, the same
+history mask, coefficient one and unchanged adaptive interval rule.
+
+On 58 reused validation windows, fresh sub8 vs candidate:
+RelL2 error 0.07776183 -> 0.07751972 (-0.3113%); MVPE
+0.06935396 -> 0.06871518 (-0.9210%); TKE 0.58696133 -> 0.58696133;
+SPS 47.741399 -> 47.871434 (+0.130035 offline points).
+The locked RelL2>=0.5% and MVPE>=1% improvement gates fail. Re 20369
+regresses RelL2 (+0.1642%), and seed 43 regresses RelL2/MVPE. TKE and SPS
+gates pass. No coefficient, seed or checkpoint retuning was performed.
+
+This is a failed robustness bridge from the post-hoc OOF mean-transplant
+finding to exact sub8, not a negation of that earlier descriptive result.
+Validation remains development evidence. Original sub8 bytes were preserved.
+Experimental staging exists at `CCCCCC/submissions/sub8_mean_adapter_candidate`,
+marked VALIDATION FAIL; it is not a ready submission. Per protocol, metric
+failure stopped before runtime benchmarking, ZIP creation and leaderboard.
+The user's authorization to use the last submission is retained; no slot was
+spent. See `research/sub8_mean_adapter/report.md`, `decision.json`, and
+`verification.json` for the artifacts and checks.
