@@ -1,0 +1,106 @@
+{
+  "timestamp": "2026-09-10 00:34:42",
+  "parity": {
+    "live_research_vs_package_batch16": {
+      "max_abs_diff": 0.0,
+      "max_rel_diff_meaningful": 0.0,
+      "allclose_1e6": true,
+      "raw_metric_delta_l2_tke_mvpe": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "metric_delta_within_1e6": true
+    }
+  },
+  "algebra_a1": {
+    "max_abs_time_mean_correction_before_mask": 2.421438605182402e-09,
+    "max_abs_time_mean_shift_base_plus_corr_before_mask": 1.4901161193847656e-07,
+    "satisfies_mean_preservation_before_mask_1e6": true,
+    "max_abs_time_mean_shift_after_persistent_zero_mask": 0.017840052023530006,
+    "masked_pixels_final_temporal_mean": 0.0
+  },
+  "guardrail_a2": {
+    "aggregate_errors": {
+      "OFF": [
+        0.08655289560556412,
+        0.5809696912765503,
+        0.08212294429540634
+      ],
+      "ON": [
+        0.08623191714286804,
+        0.5806146264076233,
+        0.08200548589229584
+      ],
+      "delta_ON_minus_OFF": [
+        -0.00032100308453664184,
+        -0.00035497621865943074,
+        -0.00011744890070986003
+      ]
+    },
+    "regression_rates_strict": [
+      0.0,
+      0.0125,
+      0.05
+    ],
+    "regression_rates_1e7": [
+      0.0,
+      0.0125,
+      0.05
+    ],
+    "masked_pixels_count": 12846,
+    "total_pixels_count": 163840,
+    "fraction_masked": 0.07840576171875,
+    "fraction_masked_future_nonzero": 0.09232445897555659,
+    "region_mse": {
+      "inside_mask_off": 5.606600097962655e-06,
+      "inside_mask_on": 5.877122362107912e-07,
+      "outside_mask_off": 0.00014097850362304598,
+      "outside_mask_on": 0.00014097850362304598
+    }
+  },
+  "intervals_a3": {
+    "constant_sps": {
+      "sps_score": 45.08582790285057,
+      "coverage": 0.8437501857751047,
+      "mean_width": 0.01857250134937459,
+      "median_width": 0.018572499975562096,
+      "width_channel_u_v": [
+        0.018572502683741162,
+        0.018572500015008018
+      ],
+      "gpu_time_median_sec": 0.0025763000012375414,
+      "gpu_time_range_sec": [
+        0.002524499999708496,
+        0.003933500003768131
+      ]
+    },
+    "adaptive_sps": {
+      "sps_score": 47.83903913397257,
+      "coverage": 0.9026394077617051,
+      "mean_width": 0.020652577814789554,
+      "median_width": 0.017110303044319153,
+      "width_channel_u_v": [
+        0.02715892679354681,
+        0.014146228836032292
+      ],
+      "gpu_time_median_sec": 0.01796969999850262,
+      "gpu_time_range_sec": [
+        0.017630799993639812,
+        0.018178600003011525
+      ]
+    }
+  },
+  "training_std_edges": {
+    "u": [
+      0.0015472875093109906,
+      0.003416250692680478,
+      0.009498917032033205
+    ],
+    "v": [
+      0.0008590439974796027,
+      0.0018396973027847707,
+      0.0053145772544667125
+    ]
+  }
+}

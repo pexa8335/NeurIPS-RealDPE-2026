@@ -1,0 +1,14 @@
+parameter,value,type,val_sps,delta_sps_vs_0.85,val_coverage_pct,mean_width
+slope_u,0.7,narrowing,47.664464,0.156323,88.4415,0.02009547
+slope_u,0.85,incumbent_baseline,47.508141,0.0,89.4638,0.02105612
+slope_u,0.95,widening (C1),47.376708,-0.131434,90.036,0.02164955
+slope_u,1.05,widening (C2),47.228805,-0.279336,90.5342,0.02220908
+slope_u,1.15,widening,47.071289,-0.436852,90.9724,0.02273768
+slope_u,1.25,widening,46.903917,-0.604225,91.3493,0.02323782
+slope_u,1.35,widening,46.730843,-0.777298,91.6772,0.0237119
+slope_u,1.5,widening,46.468784,-1.039357,92.1019,0.02437918
+q4_boost_u,0.0,baseline (0.85),47.508141,0.0,89.4638,0.02105612
+q4_boost_u,0.1,selective_widening,47.444183,-0.063958,89.7811,0.02142337
+q4_boost_u,0.2,selective_widening (C3),47.377743,-0.130398,90.0521,0.02175672
+q4_boost_u,0.3,selective_widening,47.309921,-0.19822,90.2801,0.02205914
+q4_boost_u,0.5,selective_widening,47.176179,-0.331962,90.6268,0.02258099

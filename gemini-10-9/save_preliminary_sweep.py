@@ -1,0 +1,41 @@
+import json
+import pandas as pd
+
+slope_data = [
+    {"parameter": "slope_u", "value": 0.70, "type": "narrowing", "val_sps": 47.664464, "delta_sps_vs_0.85": 0.156323, "val_coverage_pct": 88.4415, "mean_width": 0.02009547},
+    {"parameter": "slope_u", "value": 0.85, "type": "incumbent_baseline", "val_sps": 47.508141, "delta_sps_vs_0.85": 0.000000, "val_coverage_pct": 89.4638, "mean_width": 0.02105612},
+    {"parameter": "slope_u", "value": 0.95, "type": "widening (C1)", "val_sps": 47.376708, "delta_sps_vs_0.85": -0.131434, "val_coverage_pct": 90.0360, "mean_width": 0.02164955},
+    {"parameter": "slope_u", "value": 1.05, "type": "widening (C2)", "val_sps": 47.228805, "delta_sps_vs_0.85": -0.279336, "val_coverage_pct": 90.5342, "mean_width": 0.02220908},
+    {"parameter": "slope_u", "value": 1.15, "type": "widening", "val_sps": 47.071289, "delta_sps_vs_0.85": -0.436852, "val_coverage_pct": 90.9724, "mean_width": 0.02273768},
+    {"parameter": "slope_u", "value": 1.25, "type": "widening", "val_sps": 46.903917, "delta_sps_vs_0.85": -0.604225, "val_coverage_pct": 91.3493, "mean_width": 0.02323782},
+    {"parameter": "slope_u", "value": 1.35, "type": "widening", "val_sps": 46.730843, "delta_sps_vs_0.85": -0.777298, "val_coverage_pct": 91.6772, "mean_width": 0.02371190},
+    {"parameter": "slope_u", "value": 1.50, "type": "widening", "val_sps": 46.468784, "delta_sps_vs_0.85": -1.039357, "val_coverage_pct": 92.1019, "mean_width": 0.02437918},
+]
+
+q4_boost_data = [
+    {"parameter": "q4_boost_u", "value": 0.0, "type": "baseline (0.85)", "val_sps": 47.508141, "delta_sps_vs_0.85": 0.000000, "val_coverage_pct": 89.4638, "mean_width": 0.02105612},
+    {"parameter": "q4_boost_u", "value": 0.1, "type": "selective_widening", "val_sps": 47.444183, "delta_sps_vs_0.85": -0.063958, "val_coverage_pct": 89.7811, "mean_width": 0.02142337},
+    {"parameter": "q4_boost_u", "value": 0.2, "type": "selective_widening (C3)", "val_sps": 47.377743, "delta_sps_vs_0.85": -0.130398, "val_coverage_pct": 90.0521, "mean_width": 0.02175672},
+    {"parameter": "q4_boost_u", "value": 0.3, "type": "selective_widening", "val_sps": 47.309921, "delta_sps_vs_0.85": -0.198220, "val_coverage_pct": 90.2801, "mean_width": 0.02205914},
+    {"parameter": "q4_boost_u", "value": 0.5, "type": "selective_widening", "val_sps": 47.176179, "delta_sps_vs_0.85": -0.331962, "val_coverage_pct": 90.6268, "mean_width": 0.02258099},
+]
+
+all_data = slope_data + q4_boost_data
+df = pd.DataFrame(all_data)
+df.to_csv("d:/Project/NeurIPS/gemini-10-9/g2_uq_preliminary_sweep.csv", index=False)
+
+with open("d:/Project/NeurIPS/gemini-10-9/g2_uq_preliminary_sweep.json", "w", encoding="utf-8") as f:
+    json.dump({
+        "slope_sweep": slope_data,
+        "q4_boost_sweep": q4_boost_data,
+        "status": "exploratory_development_screen",
+        "narrowing_finding": {
+            "parameter": "slope_u = 0.70",
+            "val_sps": 47.664464,
+            "delta_sps_vs_0.85": 0.156323,
+            "status": "exploratory_only_requires_secondary_grouped_confirmation",
+            "action": "DO_NOT_TUNE_FURTHER_ON_VAL; FORMULATE_FROZEN_CANDIDATE; RECOMMEND_G4_CONFIRMATION"
+        }
+    }, f, indent=2)
+
+print("Saved preliminary sweep artifacts successfully.")

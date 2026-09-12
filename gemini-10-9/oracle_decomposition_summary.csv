@@ -1,0 +1,10 @@
+transformation,degrees_of_freedom,recovered_fluc_error_pct,remaining_fluc_mse,tke_rel_l2_error,notes
+1. Global Amplitude Oracle (Scalar alpha per window),1 scalar / window,2.3639831814162204,8.855095074977726e-05,0.7350100874900818,Mean optimal alpha = 0.7855 (median: 0.8149)
+"2. Local Spatial Amplitude Map (Per-pixel A(x,y) per window)","32x64x2 = 4,096 params / window",25.484850767599994,6.758148811059073e-05,0.4897225499153137,Optimal per-pixel spatial envelope matching
+"3. Temporal Phase Shift Oracle (Lag tau in [-5, 5] frames)",1 discrete lag / window,0.2243718642752387,9.049147047335282e-05,0.6491450071334839,"Lags distribution: {0: 79, 1: 1}"
+"4. Spatial Rigid Alignment Oracle ((dx, dy) in [-4, 4] pixels)",2 discrete shifts / window,0.6804240442113976,9.007785411085933e-05,0.6500110626220703,Coherent spatial advection offset search
+5. Combined Temporal Phase Shift + Local Spatial Amplitude Map,"1 lag + 4,096 spatial weights / window",25.928973565307274,6.717869109706953e-05,0.48875322937965393,Joint phase synchronization + spatial envelope matching
+6. Combined Spatial Alignment + Local Spatial Amplitude Map,"2 shifts + 4,096 spatial weights / window",26.33455651619039,6.681084778392687e-05,0.48777276277542114,Joint spatial displacement + envelope matching
+7. Joint Full Alignment (Time Lag + Spatial Shift + Local Amplitude),"3 search params + 4,096 spatial weights / window",26.37937794087952,6.677019700873643e-05,0.48646193742752075,Comprehensive space-time alignment + local envelope
+8. Theoretical Coherent Dynamics Ceiling (Top-3 POD Modes of Future),Oracle top-3 spatial/temporal coherent modes,70.68555680732509,2.658672383404337e-05,0.16864028573036194,Reconstituting top-3 coherent structures recovers 70.7% error
+9. Causal Linear History Model (PCA-32 history -> POD-16 future),"32x16 = 512 linear weights (trained on Train, held-out test)",-57.02532711336787,0.0001424140646122396,0.9629853367805481,Truly causal prediction from 20 input frames only

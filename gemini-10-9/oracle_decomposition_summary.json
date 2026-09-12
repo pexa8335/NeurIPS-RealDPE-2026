@@ -1,0 +1,91 @@
+{
+  "baseline_metrics": {
+    "mse_total": 0.00013227015733718872,
+    "mse_mean": 4.157519288128242e-05,
+    "mse_fluc": 9.06949644559063e-05,
+    "pct_mean": 31.43202799350814,
+    "pct_fluc": 68.56797200649186,
+    "baseline_tke_error": 0.6491450071334839,
+    "energy_ratio_cno_vs_target": 0.4981750762079802
+  },
+  "pod_energy_distribution": {
+    "mean_top1_pct": 46.13636016845703,
+    "mean_top3_pct": 82.48321533203125,
+    "mean_top5_pct": 93.88960266113281,
+    "cno_r2_with_dominant_mode_pct": 87.98531915411608
+  },
+  "oracle_transformations": [
+    {
+      "transformation": "1. Global Amplitude Oracle (Scalar alpha per window)",
+      "degrees_of_freedom": "1 scalar / window",
+      "recovered_fluc_error_pct": 2.3639831814162204,
+      "remaining_fluc_mse": 8.855095074977726e-05,
+      "tke_rel_l2_error": 0.7350100874900818,
+      "notes": "Mean optimal alpha = 0.7855 (median: 0.8149)"
+    },
+    {
+      "transformation": "2. Local Spatial Amplitude Map (Per-pixel A(x,y) per window)",
+      "degrees_of_freedom": "32x64x2 = 4,096 params / window",
+      "recovered_fluc_error_pct": 25.484850767599994,
+      "remaining_fluc_mse": 6.758148811059073e-05,
+      "tke_rel_l2_error": 0.4897225499153137,
+      "notes": "Optimal per-pixel spatial envelope matching"
+    },
+    {
+      "transformation": "3. Temporal Phase Shift Oracle (Lag tau in [-5, 5] frames)",
+      "degrees_of_freedom": "1 discrete lag / window",
+      "recovered_fluc_error_pct": 0.2243718642752387,
+      "remaining_fluc_mse": 9.049147047335282e-05,
+      "tke_rel_l2_error": 0.6491450071334839,
+      "notes": "Lags distribution: {0: 79, 1: 1}"
+    },
+    {
+      "transformation": "4. Spatial Rigid Alignment Oracle ((dx, dy) in [-4, 4] pixels)",
+      "degrees_of_freedom": "2 discrete shifts / window",
+      "recovered_fluc_error_pct": 0.6804240442113976,
+      "remaining_fluc_mse": 9.007785411085933e-05,
+      "tke_rel_l2_error": 0.6500110626220703,
+      "notes": "Coherent spatial advection offset search"
+    },
+    {
+      "transformation": "5. Combined Temporal Phase Shift + Local Spatial Amplitude Map",
+      "degrees_of_freedom": "1 lag + 4,096 spatial weights / window",
+      "recovered_fluc_error_pct": 25.928973565307274,
+      "remaining_fluc_mse": 6.717869109706953e-05,
+      "tke_rel_l2_error": 0.48875322937965393,
+      "notes": "Joint phase synchronization + spatial envelope matching"
+    },
+    {
+      "transformation": "6. Combined Spatial Alignment + Local Spatial Amplitude Map",
+      "degrees_of_freedom": "2 shifts + 4,096 spatial weights / window",
+      "recovered_fluc_error_pct": 26.33455651619039,
+      "remaining_fluc_mse": 6.681084778392687e-05,
+      "tke_rel_l2_error": 0.48777276277542114,
+      "notes": "Joint spatial displacement + envelope matching"
+    },
+    {
+      "transformation": "7. Joint Full Alignment (Time Lag + Spatial Shift + Local Amplitude)",
+      "degrees_of_freedom": "3 search params + 4,096 spatial weights / window",
+      "recovered_fluc_error_pct": 26.37937794087952,
+      "remaining_fluc_mse": 6.677019700873643e-05,
+      "tke_rel_l2_error": 0.48646193742752075,
+      "notes": "Comprehensive space-time alignment + local envelope"
+    },
+    {
+      "transformation": "8. Theoretical Coherent Dynamics Ceiling (Top-3 POD Modes of Future)",
+      "degrees_of_freedom": "Oracle top-3 spatial/temporal coherent modes",
+      "recovered_fluc_error_pct": 70.68555680732509,
+      "remaining_fluc_mse": 2.658672383404337e-05,
+      "tke_rel_l2_error": 0.16864028573036194,
+      "notes": "Reconstituting top-3 coherent structures recovers 70.7% error"
+    },
+    {
+      "transformation": "9. Causal Linear History Model (PCA-32 history -> POD-16 future)",
+      "degrees_of_freedom": "32x16 = 512 linear weights (trained on Train, held-out test)",
+      "recovered_fluc_error_pct": -57.02532711336787,
+      "remaining_fluc_mse": 0.0001424140646122396,
+      "tke_rel_l2_error": 0.9629853367805481,
+      "notes": "Truly causal prediction from 20 input frames only"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "goal": "Test narrow hypothesis: current history-std contribution to u-channel interval width is under-scaled for high-variance inputs.",
+  "frozen_components": {
+    "point_predictor": "Exact sub7 (Frozen CNO + Dual-Seed ZeroMean Head L0.30 + Persistent-Zero Guardrail)",
+    "v_channel_formula": "hw_v = clip(0.0032 + 0.85 * std_v * sqrt(h / 10), min=0.0032, max=0.040)",
+    "horizon_scaling": "sqrt(h / 10.0)",
+    "base_hw_u": 0.0075,
+    "max_hw": 0.04,
+    "precision": "float32",
+    "batch_size": 16
+  },
+  "candidates": {
+    "baseline": "hw_raw_u = 0.0075 + 0.85 * std_u * sqrt(h/10)",
+    "C1_mild": "hw_raw_u = 0.0075 + 0.95 * std_u * sqrt(h/10)",
+    "C2_moderate": "hw_raw_u = 0.0075 + 1.05 * std_u * sqrt(h/10)",
+    "C3_q4_boost": "hw_raw_u = 0.0075 + (0.85 + 0.20 * 1[std_u > 0.00949892]) * std_u * sqrt(h/10)"
+  },
+  "selection_partition": "validation (58 windows)",
+  "evaluation_partition": "development test (80 windows)",
+  "primary_endpoint": "SPS score",
+  "tie_rule": "Retain current sub7 bounds"
+}

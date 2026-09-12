@@ -1,0 +1,48 @@
+[{"stream_name":"stdout","time":0.79535583,"data":"Downloading codebase...\n"}
+,{"stream_name":"stdout","time":0.795432228,"data":"Running: kaggle datasets download phancanh/realpde-code-v2 --unzip\n"}
+,{"stream_name":"stdout","time":2.234098423,"data":"Warning: Looks like you're using an outdated `kaggle` version (installed: 2.0.2), please consider upgrading to the latest version (2.2.2)\n"}
+,{"stream_name":"stdout","time":2.234131424,"data":"403 Client Error: Forbidden for url: https://api.kaggle.com/v1/datasets.DatasetApiService/GetDatasetMetadata\n"}
+,{"stream_name":"stdout","time":2.29644633,"data":"Command failed with exit code 1\n"}
+,{"stream_name":"stdout","time":2.2964783300000002,"data":"Extracting code...\n"}
+,{"stream_name":"stdout","time":2.296482895,"data":"Running: unzip -q -o CCCCCC.zip -d CCCCCC\n"}
+,{"stream_name":"stderr","time":2.304849733,"data":"unzip:  cannot find or open CCCCCC.zip, CCCCCC.zip.zip or CCCCCC.zip.ZIP.\n"}
+,{"stream_name":"stdout","time":2.30531552,"data":"Command failed with exit code 9\n"}
+,{"stream_name":"stdout","time":2.305333001,"data":"Running: unzip -q -o research.zip -d research\n"}
+,{"stream_name":"stderr","time":2.308320107,"data":"unzip:  cannot find or open research.zip, research.zip.zip or research.zip.ZIP.\n"}
+,{"stream_name":"stdout","time":2.308790849,"data":"Command failed with exit code 9\n"}
+,{"stream_name":"stdout","time":2.308805207,"data":"Setting up data symlinks for build_cache...\n"}
+,{"stream_name":"stdout","time":2.315439615,"data":"--- BUILDING CACHE ---\n"}
+,{"stream_name":"stdout","time":2.315459409,"data":"Running: python CCCCCC/src/build_cache.py --split real\n"}
+,{"stream_name":"stderr","time":2.39381277,"data":"python3: can't open file '/kaggle/working/NeurIPS/CCCCCC/src/build_cache.py': [Errno 2] No such file or directory\n"}
+,{"stream_name":"stdout","time":2.405712444,"data":"Command failed with exit code 2\n"}
+,{"stream_name":"stdout","time":2.405741704,"data":"Running: python CCCCCC/src/build_cache.py --split sim\n"}
+,{"stream_name":"stderr","time":2.484261992,"data":"python3: can't open file '/kaggle/working/NeurIPS/CCCCCC/src/build_cache.py': [Errno 2] No such file or directory\n"}
+,{"stream_name":"stdout","time":2.4959320099999998,"data":"Command failed with exit code 2\n"}
+,{"stream_name":"stdout","time":2.495956576,"data":"--- RUNNING STAGE 1 (H2 VERIFICATION) ---\n"}
+,{"stream_name":"stdout","time":2.495961518,"data":"Running: python research/architecture_audit/stage1_transport_viability.py\n"}
+,{"stream_name":"stderr","time":2.5726833730000003,"data":"python3: can't open file '/kaggle/working/NeurIPS/research/architecture_audit/stage1_transport_viability.py': [Errno 2] No such file or directory\n"}
+,{"stream_name":"stdout","time":2.584652591,"data":"Command failed with exit code 2\n"}
+,{"stream_name":"stderr","time":2.598649093,"data":"cp: cannot stat 'research/architecture_audit/results': No such file or directory\n"}
+,{"stream_name":"stdout","time":2.599887025,"data":"--- RUNNING MODEL B BASELINE ---\n"}
+,{"stream_name":"stdout","time":2.599903054,"data":"Running: python CCCCCC/src/train.py --model cno --init CCCCCC/submissions/sub1_cno_sps/sim_real_cno.pth --out runs/train/cno_baseline --epochs 50 --batch 4\n"}
+,{"stream_name":"stderr","time":2.68278347,"data":"python3: can't open file '/kaggle/working/NeurIPS/CCCCCC/src/train.py': [Errno 2] No such file or directory\n"}
+,{"stream_name":"stdout","time":2.6962887159999998,"data":"Command failed with exit code 2\n"}
+,{"stream_name":"stdout","time":2.696318025,"data":"--- RUNNING MODEL B+T TRANSPORT ---\n"}
+,{"stream_name":"stdout","time":2.696323891,"data":"Running: python research/architecture_audit/train_transport.py --model cno --init CCCCCC/submissions/sub1_cno_sps/sim_real_cno.pth --out runs/train/cno_transport --epochs 50 --batch 4\n"}
+,{"stream_name":"stderr","time":2.78124176,"data":"python3: can't open file '/kaggle/working/NeurIPS/research/architecture_audit/train_transport.py': [Errno 2] No such file or directory\n"}
+,{"stream_name":"stdout","time":2.793160768,"data":"Command failed with exit code 2\n"}
+,{"stream_name":"stdout","time":2.793210953,"data":"--- RUNNING EVALUATION (H3 VERIFICATION) ---\n"}
+,{"stream_name":"stdout","time":2.793221848,"data":"Running: python research/architecture_audit/evaluate_horizon.py\n"}
+,{"stream_name":"stderr","time":2.873321355,"data":"python3: can't open file '/kaggle/working/NeurIPS/research/architecture_audit/evaluate_horizon.py': [Errno 2] No such file or directory\n"}
+,{"stream_name":"stdout","time":2.8851453559999998,"data":"Command failed with exit code 2\n"}
+,{"stream_name":"stdout","time":2.885199289,"data":"Copying results to /kaggle/working...\n"}
+,{"stream_name":"stderr","time":2.887835498,"data":"cp: cannot stat 'runs/train/cno_baseline': No such file or directory\n"}
+,{"stream_name":"stderr","time":2.890804337,"data":"cp: cannot stat 'runs/train/cno_transport': No such file or directory\n"}
+,{"stream_name":"stdout","time":2.891228461,"data":"ALL EXPERIMENTS COMPLETED!\n"}
+,{"stream_name":"stderr","time":4.954460978,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":4.954492103,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5.255139993,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5.255182829,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":6.522356647,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":7.737941116,"data":"[NbConvertApp] Writing 281428 bytes to __results__.html\n"}
+]

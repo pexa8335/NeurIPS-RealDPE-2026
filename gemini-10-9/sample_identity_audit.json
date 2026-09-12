@@ -1,0 +1,25 @@
+{
+  "total_windows": 477,
+  "unique_sample_ids": 477,
+  "is_unique": true,
+  "fold_counts": {
+    "train": 339,
+    "test": 80,
+    "validation": 58
+  },
+  "max_folds_per_trajectory": 1,
+  "cross_fold_frame_overlaps": 0,
+  "max_diff_raw_vs_cached_target": 0.4051160514354706,
+  "hypo13_mislabeled_windows": 78,
+  "actual_re_distribution": {
+    "13977": 30,
+    "6306": 30,
+    "24204": 20
+  },
+  "hypo13_assumed_re_distribution": {
+    "6306": 28,
+    "13977": 26,
+    "24204": 26
+  },
+  "affected_scope": "Diagnostic labels only; model training, splits, and aggregate predictions unaffected."
+}

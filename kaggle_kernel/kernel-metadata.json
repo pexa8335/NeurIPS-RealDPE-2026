@@ -1,0 +1,17 @@
+{
+  "id": "phancanh/realpde-experiments",
+  "title": "RealPDE Experiments",
+  "code_file": "run_experiments.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_internet": "true",
+  "dataset_sources": [
+    "phancanh/realpde-competition-data",
+    "rishigarg777/realpde-step-0-checkpoints"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

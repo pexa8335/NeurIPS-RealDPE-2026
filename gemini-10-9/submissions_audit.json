@@ -1,0 +1,79 @@
+[
+  {
+    "name": "sub1_cno_sps",
+    "zip_exists": true,
+    "zip_size": 29653891,
+    "zip_sha256": "51620e1a3256df389cf83a9310ff84660b3b20560c224365d04404ff3711bf9a",
+    "folder_exists": true,
+    "zip_entries_count": 62,
+    "has_submission_py": true,
+    "has_sim_real_cno": true,
+    "has_head_weights": false
+  },
+  {
+    "name": "sub2_fno_sps",
+    "zip_exists": true,
+    "zip_size": 186276591,
+    "zip_sha256": "ec0a9cb06e5984370520223fb68526bdfb19601188bfda67ce7b0d1ea4efaf24",
+    "folder_exists": true,
+    "zip_entries_count": 62,
+    "has_submission_py": true,
+    "has_sim_real_cno": false,
+    "has_head_weights": false
+  },
+  {
+    "name": "sub3_cno_head_sps",
+    "zip_exists": true,
+    "zip_size": 30069893,
+    "zip_sha256": "4a4272da3f386e17915c9306b553e36b6e64ba61aba4df6b3103e45065f98961",
+    "folder_exists": true,
+    "zip_entries_count": 63,
+    "has_submission_py": true,
+    "has_sim_real_cno": true,
+    "has_head_weights": true
+  },
+  {
+    "name": "sub4_cno_head_adaptive_sps",
+    "zip_exists": true,
+    "zip_size": 30070317,
+    "zip_sha256": "dee766f32d143e4f7565c8abdbac6f8454ede496b5bb5e7d27ab33f2d8461cde",
+    "folder_exists": true,
+    "zip_entries_count": 63,
+    "has_submission_py": true,
+    "has_sim_real_cno": true,
+    "has_head_weights": true
+  },
+  {
+    "name": "sub5_cno_head_adaptive_sps",
+    "zip_exists": true,
+    "zip_size": 30070239,
+    "zip_sha256": "833cb41267ae6da2788fcb7ccac3e5379c9e76bf38a25d37ce9f79fda716dc57",
+    "folder_exists": true,
+    "zip_entries_count": 63,
+    "has_submission_py": true,
+    "has_sim_real_cno": true,
+    "has_head_weights": true
+  },
+  {
+    "name": "sub6_cno_zeromean_head_sps",
+    "zip_exists": true,
+    "zip_size": 30070284,
+    "zip_sha256": "5b4a6d597013dfecff5275a4179511c4cf1789e36e6ea4f4338de0e5d7afaaa3",
+    "folder_exists": true,
+    "zip_entries_count": 63,
+    "has_submission_py": true,
+    "has_sim_real_cno": true,
+    "has_head_weights": true
+  },
+  {
+    "name": "sub7_cno_zeromean_head_adaptive_sps",
+    "zip_exists": true,
+    "zip_size": 30070489,
+    "zip_sha256": "2e42b16da2eba7e794d90579003e31c9417d3e720f7babdb932bd376f810762a",
+    "folder_exists": true,
+    "zip_entries_count": 63,
+    "has_submission_py": true,
+    "has_sim_real_cno": true,
+    "has_head_weights": true
+  }
+]
