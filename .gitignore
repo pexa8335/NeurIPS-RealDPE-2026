@@ -21,3 +21,5 @@ b64.py
 *.txt
 *.zip
 CCCCCC.rar
+*.pth
+*.pyc
