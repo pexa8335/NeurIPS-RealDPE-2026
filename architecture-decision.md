@@ -1485,3 +1485,43 @@ failure stopped before runtime benchmarking, ZIP creation and leaderboard.
 The user's authorization to use the last submission is retained; no slot was
 spent. See `research/sub8_mean_adapter/report.md`, `decision.json`, and
 `verification.json` for the artifacts and checks.
+
+## Direct mean objective and sub10 update (2026-09-13)
+
+Completed `research/mean_only_12_9/`: direction diagnostic on the fixed
+full-training adapters, then six matched direct-mean runs across the existing
+three Re folds and seeds42/43. The same 55,528-parameter network, normalization,
+orders and 12-epoch budget were retained; output was temporally averaged and
+trained with normalized mean-residual MSE only. This tests the combined output
+projection/objective intervention, not removing TKE loss in isolation.
+
+The prior adapter ensemble has positive target alignment in both validation Re
+groups. At Re10142 the descriptive optimal scalar is 0.9231 and mean SSE improves;
+at Re20369 it is 0.4065 and the unscaled correction increases mean SSE. These
+are target-informed descriptive values, never applied or selected as calibration.
+
+Direct-mean hybrid OOF: RelL2 0.08553743, MVPE 0.07986816, TKE 0.58846867,
+mean SSE 3.80538683. Against ZeroMean, RelL2 improves only 0.0470%, MVPE
+0.3472%, and mean SSE regresses 0.5036%. Against Ordinary-mean hybrid it loses
+mean SSE in **all 13 Re groups**; both seeds regress RelL2/MVPE. Paired
+trajectory bootstrap mean-SSE difference CI is [0.052851,0.100511]. Only TKE
+invariance passes the gates. **FAIL: stop this direct-mean configuration without
+retuning; no full-data integration, ZIP or leaderboard use.** This closes the
+tested objective/configuration, not all possible mean adaptation.
+
+User supplied the following **sub10 hidden-leaderboard result**: RelL2 94.582535,
+TKE 75.183675, MVPE 93.487926, time 87.277645, SPS 37.661454,
+final 79.230261. Relative to sub8, point scores are unchanged, SPS is -0.085984,
+time +0.058345 and final -0.016063. The result is user-reported leaderboard
+evidence, not an independently fetched server record.
+
+Both local sub10 ZIP copies have SHA256
+`4a686c321cf862c02857ad84a051bbc2e25f23a6c4c766a642460ec942cf8db3`.
+Archive comparison with sub8 found identical entries and identical file bytes
+except submission.py. Ignoring newline encoding, the sole code change multiplies
+clamped u half-width by 0.80 and v half-width by 0.95. This is a hidden FAIL for
+that specific bounds-narrowing rule, not for mean correction or all UQ methods.
+Preserve original sub8 bounds and do not transfer the sub10 narrowing into a
+future candidate. Sub8 remains the best supplied hidden result (79.246324).
+The current remaining submission quota is not verified after the new sub10
+information; no assumption about a still-available final slot is warranted.

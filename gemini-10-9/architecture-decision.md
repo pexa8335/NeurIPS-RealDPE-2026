@@ -323,3 +323,24 @@ Recommend packaging the frozen candidate ($s_u=0.70$) into a single controlled e
 **`sub8_cno_zeromean_head_adaptive_sps_narrow`**  
 *(Official packaging, submission, and test evaluation withheld pending explicit user instruction).* Current repo incumbent remains `sub7`.
 
+---
+
+## 6. G5 — Horizon Fluctuation Decay Diagnostic Audit (2026-09-13)
+
+**Directory**: `research/tke_horizon_mechanism_13_9/`  
+**Protocol**: [`protocol.md`](file:///d:/Project/NeurIPS/research/tke_horizon_mechanism_13_9/protocol.md)  
+**Report**: [`report.md`](file:///d:/Project/NeurIPS/research/tke_horizon_mechanism_13_9/report.md)  
+**Data Support**: Strictly 339 training windows (`meta.fold == 'train'`). Zero exposure of 58 validation or 80 development windows.
+
+### 6.1 Diagnostic Findings
+1. **H1 (Pure Amplitude Damping) REJECTED**: Target-informed oracle least-squares scaling increases TKE error by $+20.9\%$ ($0.5885 \to 0.7114$); mean oracle scale $a^* = 0.733 < 1.0$ due to low pattern correlation ($0.44$).
+2. **H2 (Pattern / Phase Collapse) SUPPORTED**: Spatial cosine similarity decays from $0.7513$ at $h=1$ to $0.4420$ at $h=20$. Higher $\lambda_{TKE} = 0.80$ does not improve pattern similarity ($\Delta S = -0.0125$).
+3. **H3 (High-Frequency Loss) WEAKENED**: Temporal damping is broadband across all frequencies (High band deficit is $1.25\times$ Low band deficit, far below $2.5\times$).
+4. **H4 (Spatial Transport Drift) WEAKENED**: 2D bounded translation alignment yields an alignment gain of only $+0.0387$ at $h=20$ (shift norm $1.32$ px), explaining $<10\%$ of structural decay.
+5. **H5 (Limited Predictability / Conditional-Mean Collapse) STRONGLY SUPPORTED**: Out-of-fold nearest-history neighbor future correlation drops to $0.0755$ at $h=16 \dots 20$, while persistence correlation becomes negative ($-0.185$). Realization-specific paths diverge; any deterministic MSE-trained model naturally converges toward the smoothed conditional expectation $\mathbb{E}[y \mid x]$.
+
+### 6.2 Decision Gate Verdict:
+# **`D. LIMITED-PREDICTABILITY SIGNAL`**
+**Architecture Directive**: Creating a new deterministic neural architecture is **NOT scientifically justified** at this stage. Deterministic model capacity is not the root constraint; the fundamental constraint is limited realization-level predictability from the 20-frame history.
+
+
